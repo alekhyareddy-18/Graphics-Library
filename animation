@@ -1,0 +1,30 @@
+#include <graphics.h>
+#include <conio.h>
+#include <dos.h>
+
+void drawButterfly(int x, int y) {
+    setcolor(YELLOW);
+    circle(x, y, 10); // body
+    setfillstyle(SOLID_FILL, RED);
+    fillellipse(x - 15, y - 15, 10, 15); // left top wing
+    fillellipse(x + 15, y - 15, 10, 15); // right top wing
+    fillellipse(x - 15, y + 15, 10, 15); // left bottom wing
+    fillellipse(x + 15, y + 15, 10, 15); // right bottom wing
+}
+
+int main() {
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, "");
+
+    int x = 50, y = 200;
+    while (!kbhit()) {
+        cleardevice();
+        drawButterfly(x, y);
+        delay(50);
+        x += 5;
+        if (x > getmaxx()) x = 0;
+    }
+
+    closegraph();
+    return 0;
+}
